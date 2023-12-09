@@ -12,7 +12,8 @@ class Post extends Model
 
     protected $fillable = [
         'title',
-        'description'
+        'description',
+        'comment'
     ];
 
     public function likes(): HasMany
