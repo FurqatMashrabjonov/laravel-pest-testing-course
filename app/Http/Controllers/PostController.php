@@ -12,7 +12,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::query()->get();
+
+        return view('posts', compact('posts'));
     }
 
     /**
