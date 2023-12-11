@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestMail;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -17,12 +19,23 @@ class PostController extends Controller
         return view('posts', compact('posts'));
     }
 
+    public function create(){
+        return view('posts-create');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string'
+        ]);
+
+        Post::query()->create($validated);
+
+        return redirect('/');
     }
 
     /**
